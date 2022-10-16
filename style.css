@@ -18,6 +18,8 @@ body {
   position: fixed;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: auto;
 
 }
 
@@ -32,7 +34,9 @@ video {
   position: fixed;
   left: 0;
   top: 0;
-
+  height: 100vw;
+  width: 100vw;
+ background-color: rgba(255,255,255,0.35); 
 }
 
 /* Container */
@@ -127,11 +131,15 @@ li span {
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
   .video-background {
-
+    height: 100vw;
+    width: 100vw;
   }
   
   video {
-
+    /* allow us the object fit property  */
+    object-fit: cover;
+    /* just horizantal value*/
+    object-position: 70%;
     margin-top: -1px;
   }
 
