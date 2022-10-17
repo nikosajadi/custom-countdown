@@ -1,5 +1,5 @@
 
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500&family=Ibarra+Real+Nova:ital@1&family=Lato:ital,wght@0,400;1,100&family=Nunito&display=swap');
 html {
   box-sizing: border-box;
 }
@@ -10,6 +10,7 @@ body {
   overflow-y: hidden;
   display: flex;
   align-items: center;
+  font-family: Nunito, sans-serif;
 
 }
 
@@ -83,6 +84,7 @@ input {
   border-radius: 20px;
   background: #fff;
   outline: none;
+  font-family: Nunito, sans-serif;
 
 }
 
@@ -100,6 +102,9 @@ button {
   outline: none;
 }
 
+button:hover {
+  filter: brightness(110%);
+}
 
 
 /* Countdown */
@@ -126,6 +131,9 @@ li span {
   position: relative;
   top: 60px;
 }
+
+
+
 
 
 /* Media Query: Large Smartphone (Vertical) */
