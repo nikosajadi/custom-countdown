@@ -11,7 +11,10 @@ let countdowntitle ='';
 let countdownDate = '';
 let countdownvalue = Date;
 
-
+const second = 1000;
+const minute = second * 60;
+const hour = minute * 60;
+const day = hour * 24;
 
 //set Date input Min with Today's date
 const today = new Date().toISOString().split('T')[0];
@@ -21,14 +24,23 @@ const today = new Date().toISOString().split('T')[0];
 
 //Populate countdoen / complete UI
 function updateDOM(){
- const now = new Date().getTime();
- const distance = countdownvalue - now;
- console.log('distance' , distance);
+  const now = new Date().getTime();
+  const distance = countdownValue - now;
+ console.log('distance:', distance);
+
+
+const days = Math.floor(distance / day);
+const hours = Math.floor((distance % day) / hour);
+const minutes = Math.floor((distance % hour) / minute);
+const seconds = Math.floor((distance % minute) / second);
+console.log(days, hours, minutes, seconds)
+
+
+// Hide Input
+inputContainer.hidden = true;
+// show countdown
+countdownEl.hidden = false;
 }
-
-
-
-
 
  //Take values from Input
  function updateCountdown(e) {
@@ -39,11 +51,10 @@ function updateDOM(){
     console.log(countdowntitle, countdownDate);
     // Get number of current Date, updateDOM
     countdownvalue = new Date(countdownDate).getTime();
-    console.log ('Countdown value', countdownvalue)
-    updateDom();
+    console.log ('Countdown value:', countdownvalue)
+    updateDOM();
  }
 
 
  //event listeners
-
- countdownForm.addEventListener('submit', updateCountdown);
+  countdownForm.addEventListener('submit', updateCountdown);
