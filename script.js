@@ -10,6 +10,7 @@ const timeElements = document.querySelectorAll('span');
 let countdownTitle = '';
 let countdownDate = '';
 let countdownValue = Date;
+let countdownActive;
 
 const second = 1000;
 const minute = second * 60;
@@ -22,9 +23,10 @@ const today = new Date().toISOString().split('T')[0];
 dateEl.setAttribute('min',today);
 
 
-//Populate countdoen / complete UI
+//
 function updateDOM(){
-  const now = new Date().getTime();
+  countdownActive = setInterval(()=>{
+    const now = new Date().getTime();
   const distance = countdownValue - now;
  console.log('distance:', distance);
 
@@ -46,21 +48,46 @@ timeElements [3].textContent = `${seconds}`
 inputContainer.hidden = true;
 // show countdown
 countdownEl.hidden = false;
-}
+// second: 1000
+  } ,second);
+  }
+ 
 
- //Take values from Input
- function updateCountdown(e) {
+ 
+//Take values from Input
+function updateCountdown(e) {
   //The preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
    e.preventDefault();
     countdownTitle = e.srcElement[0].value;
     countdownDate = e.srcElement[1].value;
     console.log(countdownTitle, countdownDate);
-    // Get number of current Date, updateDOM
-    countdownValue = new Date(countdownDate).getTime();
-    console.log ('Countdown value:', countdownValue)
-    updateDOM();
- }
+  // check for valid date
+  if (countdownDate === ''){
+      alert ('Please select a date');
+    
+  } else {
+      // Get number of current Date, updateDOM
+      countdownValue = new Date(countdownDate).getTime();
+      console.log ('Countdown value:', countdownValue)
+      updateDOM();
+  }
+}
+
+
+//Reset all Value
+function reset(){
+//  Hide countdown, show inputContainer
+  countdownEl.hidden = true;
+  inputContainer.hidden = false;
+//stop the countdown
+  clearInterval(countdownActive);
+//  Reset value
+  countdownTitle = '';
+  countdownDate = '';
+}
+
 
 
  //event listeners
   countdownForm.addEventListener('submit', updateCountdown);
+  countdownBtn.addEventListener ('click', reset);
