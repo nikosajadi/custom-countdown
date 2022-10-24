@@ -11,8 +11,8 @@ const completeEl = document.getElementById('complete');
 const completeElInfo = document.getElementById('complete-info');
 const completeBtn = document.getElementById('complete-button');
 
-let countdownTitle = '';
-let countdownDate = '';
+let countdownTitle = " ";
+let countdownDate = " ";
 let countdownValue = Date;
 let countdownActive;
 // it is a global variable
@@ -81,6 +81,7 @@ function updateCountdown(e) {
       date: countdownDate,
     }; 
     console.log(savedCountdown);
+    // here JSON will be JavaScript value to a JSON string
    localStorage.setItem('countdown', JSON.stringify(savedCountdown));
      
   // check if no date enterd
@@ -108,10 +109,23 @@ function reset(){
   countdownTitle = '';
   countdownDate = '';
 }
-
+function resetorePreviousCountdown() {
+  // get countdown from localStorage if available
+  if (localStorage.getItem('countdown')){
+    inputContainer.hidden = true;
+    savedCountdown =  JSON.parse (localStorage.getItem('countdown'));
+    countdownTitle = savedCountdown;
+    countdownDate =  savedCountdown;
+    countdownValue = new Date(countdownDate).getTime();
+    updateDOM();
+  }
+}
 
 
  //event listeners
   countdownForm.addEventListener('submit', updateCountdown);
   countdownBtn.addEventListener ('click', reset);
   completeBtn.addEventListener ('click', reset);
+
+  // on Load, check localStorage
+  resetorePreviousCountdown();
