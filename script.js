@@ -11,8 +11,8 @@ const completeEl = document.getElementById('complete');
 const completeElInfo = document.getElementById('complete-info');
 const completeBtn = document.getElementById('complete-button');
 
-let countdownTitle = " ";
-let countdownDate = " ";
+let countdownTitle = '';
+let countdownDate = '';
 let countdownValue = Date;
 let countdownActive;
 // it is a global variable
@@ -108,14 +108,16 @@ function reset(){
 //  Reset value
   countdownTitle = '';
   countdownDate = '';
+  localStorage.removeItem('countdown');
 }
+
 function resetorePreviousCountdown() {
   // get countdown from localStorage if available
   if (localStorage.getItem('countdown')){
     inputContainer.hidden = true;
     savedCountdown =  JSON.parse (localStorage.getItem('countdown'));
-    countdownTitle = savedCountdown;
-    countdownDate =  savedCountdown;
+    countdownTitle = savedCountdown.title;
+    countdownDate =  savedCountdown.date;
     countdownValue = new Date(countdownDate).getTime();
     updateDOM();
   }
